@@ -7,3 +7,22 @@ puts "Введите Ваш возраст:"
 
 @difference_age =  18 - @age 
 
+def gradient_age
+  if @difference_age == 1
+    return "год"
+  elsif @difference_age == 2
+    return "года"
+  elsif @difference_age == 3
+    return "года"
+  elsif @difference_age == 4
+    return "года"
+  else
+    return "лет"
+  end
+end
+
+def pass
+  return @age >= 18 ? ("#{@name} #{@surname}, добро пожаловать на наш курс.") : ("#{@name} #{@surname}, тебе еще рановато. Приходи через #{@difference_age} #{gradient_age}")
+end
+
+puts pass
