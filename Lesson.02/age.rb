@@ -1,4 +1,6 @@
-puts "Здравствуйте. Ведите Ваше имя:"
+print "Компания 'CDG' приветствует Вас. Для продолжения нажмите 'Enter'."
+  gets.chomp
+puts "Ведите Ваше имя:"
   @name = gets.chomp
 puts "Введите Вашу фамилию:"
   @surname = gets.chomp
@@ -22,7 +24,7 @@ def gradient_age
 end
 
 def pass
-  return @age >= 18 ? ("#{@name} #{@surname}, добро пожаловать на наш курс.") : ("#{@name} #{@surname}, Вам еще рано. Приходите через #{@difference_age} #{gradient_age}")
+  return @age >= 18 ? ("Здравствуйте, #{@name} #{@surname}. Самое время заняться делом.") : ("Здравствуйте, #{@name} #{@surname}. Вам меньше 18 лет, но начать учиться программированию никогда не рано. Усердно учитесь и через #{@difference_age} #{gradient_age} когда Вам исполнится 18 лет, Вы сможете заняться делом.")
 end
 
 puts pass
