@@ -22,7 +22,7 @@ def gradient_age
 end
 
 def pass
-  return @age >= 18 ? ("#{@name} #{@surname}, добро пожаловать на наш курс.") : ("#{@name} #{@surname}, тебе еще рановато. Приходи через #{@difference_age} #{gradient_age}")
+  return @age >= 18 ? ("#{@name} #{@surname}, добро пожаловать на наш курс.") : ("#{@name} #{@surname}, Вам еще рано. Приходи через #{@difference_age} #{gradient_age}")
 end
 
 puts pass
