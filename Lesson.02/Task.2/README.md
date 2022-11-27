@@ -1,10 +1,10 @@
-# Run script
+# Run script/Запуск скрипта
 
 ```sh
     ruby foobar.rb
 ```
 
-# Instruction
+# Instruction (EN)
 
 Enter two numbers. If one of the numbers is 20, the program will output the second number, if none of the numbers will be equal to 20, the program will output the sum of the two numbers.
 
