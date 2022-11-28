@@ -1,18 +1,18 @@
 puts "Введите первое число"
-  @a = gets.chomp.to_i
+  a = gets.chomp.to_i
 puts "Введите второе число"
-  @b = gets.chomp.to_i
+  b = gets.chomp.to_i
 
-@sum = @a + @b
+sum = a + b
 
-  def foobar
-    if @a == 20
-      return "Второе число равно #{@b}"
-    elsif @b == 20
-      return "Первое число равно #{@a}"
+  def foobar(a, b, sum)
+    if a == 20
+      return "Второе число равно #{b}"
+    elsif b == 20
+      return "Первое число равно #{a}"
     else 
-      return "Сумма двух чисел равна #{@sum}"
+      return "Сумма двух чисел равна #{sum}"
     end
   end
 
-puts foobar
+puts foobar(a, b, sum)
