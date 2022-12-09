@@ -18,36 +18,37 @@ retry_method
 
 def add_pockemons(h, arr, s)
   loop do
-    puts "Введи имя покемона или 'q' для выхода из программы."
+    puts "Введи имя покемона или 'q' для выхода из программы:"
       loop do
-        name = gets.chomp
-      if name.length == 0
+        @name = gets.chomp
+      if @name.length == 0
         puts "Ошибка, пустой ввод. Повтори снова:"
       end
-    break if name.length > 0
+    break if @name.length > 0
   end
     
-    puts "Введи цвет покемона"
+    puts "Введи цвет покемона:"
       loop do
-        color = gets.chomp
-      if color.length == 0
+        @color = gets.chomp
+      if @color.length == 0
         puts "Ошибка, пустой ввод. Повтори снова:"
       end
-    break if color.length > 0
+    break if @color.length > 0
   end
     
     s += 1
-    h = {name: name, color: color}
+    h = {name: @name, color: @color}
     arr.push(h)
-    break if s == @step || name == "q" || name == "Q"
+    break if s == @step || @name == "q" || @name == "Q"
     #binding.pry
   end
 end
 
 add_pockemons(h, arr, s)
 
-puts "Теперь посмотри кто у тебя в списке"
+puts "Теперь посмотри кто у тебя в списке."
   arr.each do |name|
     #binding.pry
    puts "Имя покемона: #{name[:name]}. Цвет покемона: #{name[:color]}"
   end
+puts "\nА так же в виде массива:#{arr}"
