@@ -8,7 +8,9 @@ puts "\nФайл успешно загружен. Для получения сп
 
 def index
   puts "\nАвтомобили в списке:\n".center(172, "=")
-    File.foreach(CAR_LIST) { |car| puts "> #{car}" }
+    file = File.open(CAR_LIST)
+      @arr = file.readlines.map { |x| x.chomp }
+  puts @arr
 end
 
 puts "#{index}\nДля замены автомобиля в списке можно выполнить его поиск по id или модели.\n".center(226, "-")
@@ -37,11 +39,10 @@ elsif method == "2"
       model = gets.chomp
 
     def where(model)
-      File.foreach(CAR_LIST).with_index do |car, index|
-        @car_id = index if car.include?(model)
-      end
+      @car_id = (0 ... @arr.length).find_all { |i| @arr[i] == model }
+      #@line_id = @car_id.join (",")
     print "\nID автомобиля в списке = #{@car_id}\n>1 - Заменить.\n>2 - Повторить поиск.\nВвод >> ".rjust(148, "-")
-  end
+    end
     print "#{where(model)}"
       find_method1 = gets.chomp.to_i
   break if find_method1 == 1
@@ -71,6 +72,22 @@ def update_index
 end
 
 puts "#{update_index}"
+
+puts ""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 =begin print "#{update_index}\nТеперь попробуй удалить ненужный автомобиль из списка.\nНо перед этим проверь список и найди этот автомобиль по id.\nДля этого введи id автомобиля - ".rjust(211, "-")
 
