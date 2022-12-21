@@ -10,10 +10,55 @@ def index
   puts "\nАвтомобили в списке:\n".center(172, "=")
     file = File.open(CAR_LIST)
       @arr = file.readlines.map { |x| x.chomp }
-  puts @arr
+    File.foreach(CAR_LIST) { |car| puts "> #{car}" }
 end
 
-puts "#{index}\nДля замены автомобиля в списке можно выполнить его поиск по id или модели.\n".center(226, "-")
+puts "#{index}"
+
+loop do
+  puts "\nВыбери необходимую функцию:\n".center(179, "=")
+    print"1 - Добавить автомобиль в конец списка.\n2 - Заменить автомобиль в списке.\n3 - Удалить автомобиль из списка по ID.\nВвод >> "
+    function = gets.chomp.to_i
+
+  if function == 1
+    def add_list
+      print "\nВведи модель автомобиля >> ".rjust(103, "-")
+        add_car = gets.chomp
+      File.write(CAR_LIST, "#{add_car}\n", mode: "a")
+      puts "\nАвтомобиль добавлен. Список обновлен:\n".center(189, "=")
+      File.foreach(CAR_LIST) { |car| puts "> #{car}" }
+    end
+    puts add_list
+  
+  elsif function == 3
+    loop do
+      print "\nВведи модель автомобиля для поиска ID:\nВвод >> ".rjust(123, "-")
+        model = gets.chomp
+        @car_id = (0 ... @arr.length).find_all { |i| @arr[i] == model }
+          print "\nID автомобиля в списке = #{@car_id}\n>1 - Удалить.\n>2 - Повторить поиск.\nВвод >> ".rjust(149, "-")
+            delete_method = gets.chomp.to_i
+      break if delete_method == 1
+    end
+    print "\nВведи ID автомобиля для удаления >> ".rjust(112, "-")
+      id_delete = gets.chomp.to_i
+      @arr.slice!(id_delete)
+      string = @arr.join("\n")
+      def delete(id_delete, string)
+        file = File.open(BUFFER, "w")
+          file.write (string)
+            file.close
+
+          File.write(CAR_LIST, File.read(BUFFER))
+          File.delete(BUFFER) if File.exist?(BUFFER)
+        puts "\nАвтомобиль удален. В списке осталось:\n".center(189, "=")
+        File.foreach(CAR_LIST) { |car| puts "> #{car}" }
+        end
+          delete(id_delete, string)
+      end
+  break if function == 2
+end
+
+puts "\nДля замены автомобиля в списке можно выполнить его поиск по id  или модели.\n".center(227, "-")
 print "Выбери способ поиска:\n>1 - ID.\n>2 - Модель.\nВвод >> "
   method = gets.chomp
 
@@ -57,6 +102,7 @@ def update(update_id, update_model)
   file = File.open(BUFFER, "w")
   File.foreach(CAR_LIST).with_index do |car, index|
     file.puts(update_id == index ? update_model : car)
+  #binding.pry
   end
 
   file.close
@@ -71,31 +117,4 @@ def update_index
     File.foreach(CAR_LIST) { |car| puts "> #{car}" }
 end
 
-puts "#{update_index}"
-
-puts ""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=begin print "#{update_index}\nТеперь попробуй удалить ненужный автомобиль из списка.\nНо перед этим проверь список и найди этот автомобиль по id.\nДля этого введи id автомобиля - ".rjust(211, "-")
-
-  id = gets.chomp.to_i
-
-def find(id)
-  File.readlines(CAR_LIST)[id]
-end
-
-puts "\nПод номером #{id} записан автомобиль - #{find(id)}".center(169, "=")
-=end
+update_index
