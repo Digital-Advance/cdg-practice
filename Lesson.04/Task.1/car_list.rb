@@ -17,7 +17,7 @@ puts "#{index}"
 
 loop do
   puts "\nВыбери необходимую функцию:\n".center(179, "=")
-    print"1 - Добавить автомобиль в конец списка.\n2 - Заменить автомобиль в списке.\n3 - Удалить автомобиль из списка по ID.\nВвод >> "
+    print"1 - Добавить автомобиль в конец списка.\n2 - Заменить автомобиль в списке.\n3 - Удалить автомобиль из списка по ID.\n4 - Завершить программу.\nВвод >> "
     function = gets.chomp.to_i
 
   if function == 1
@@ -38,7 +38,7 @@ loop do
           print "\nID автомобиля в списке = #{@car_id}\n>1 - Удалить.\n>2 - Повторить поиск.\nВвод >> ".rjust(149, "-")
             delete_method = gets.chomp.to_i
       break if delete_method == 1
-    end
+
     print "\nВведи ID автомобиля для удаления >> ".rjust(112, "-")
       id_delete = gets.chomp.to_i
       @arr.slice!(id_delete)
@@ -53,8 +53,13 @@ loop do
         puts "\nАвтомобиль удален. В списке осталось:\n".center(189, "=")
         File.foreach(CAR_LIST) { |car| puts "> #{car}" }
         end
-          delete(id_delete, string)
-      end
+      delete(id_delete, string)
+    end
+
+  elsif function == 4
+    abort "\nПрограмма завершена\n".center(171, "=")
+  end
+
   break if function == 2
 end
 
@@ -118,3 +123,5 @@ def update_index
 end
 
 update_index
+
+puts "\nПрограмма завершена\n".center(171, "=")
