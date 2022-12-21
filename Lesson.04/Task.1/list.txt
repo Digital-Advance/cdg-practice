@@ -4,3 +4,4 @@ KIA
 Daewoo
 Nissan
 Mazda
+SsangYoung
