@@ -4,4 +4,3 @@ KIA
 Daewoo
 Nissan
 Mazda
-LADA
