@@ -76,31 +76,31 @@ def select_function
 
     elsif function == 3
       def delete_student
-        print "Введи фамилию студента которого необходимо удалить из списка >> "
+        print "\nВведи фамилию студента которого необходимо удалить из списка >> ".rjust(141, "-")
           delete_surname = gets.chomp
         delete_id = (0 ... @arr.length).find_all {|i| @arr[i].include? delete_surname}
-        print "\nID студента с фамилией #{delete_surname} = #{delete_id}\n> 1 - Удалить.\n> 2 - Отменить и выйти в главное меню.\nВвод >> "
+        print "\nID студента с фамилией #{delete_surname} = #{delete_id}\n> 1 - Удалить.\n> 2 - Отменить и выйти в главное меню.\nВвод >> ".rjust(177, "-")
           choise = gets.chomp.to_i
 
         if choise == 1
-          print "Введи ID для удаления >> "
+          print "\nВведи ID для удаления >> ".rjust(102, "-")
             id_deleted = gets.chomp.to_i
           @arr.slice!(id_deleted)
             delete_string = @arr.join("\n")
           file = File.open(BUFFER, "w")
-          file.write (delete_string)
+          file.write ("#{delete_string}\n")
             file.close
 
           File.write(STUDENT_LIST, File.read(BUFFER))
           File.delete(BUFFER) if File.exist?(BUFFER)
+            puts "Обновленный список:\n".ljust(96, "=")
           File.foreach(STUDENT_LIST) { |student| puts student }
         end
       end
       delete_student
 
     elsif function == 4
-      abort "\nПрограмма завершена\n".center(171, "=")
-    break if function == 2
+      abort "\nПрограмма завершена.\n".center(174, "=")
     end
   end
 end
