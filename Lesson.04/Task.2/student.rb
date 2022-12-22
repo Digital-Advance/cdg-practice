@@ -2,6 +2,7 @@ require 'pry'
 
 STUDENT_LIST = 'student_list.txt'
 RESULTS = 'results.txt'
+BUFFER = 'buffer.txt'
 
 puts "\nФайл успешно загружен. Для получения списка студентов нажми 'Enter'.".rjust(146, "_")
   gets.chomp
@@ -17,8 +18,8 @@ puts "#{index}"
 
 def select_function
   loop do
-    puts "\nВыбери необходимую функцию:\n".center(181, "=")
-    print"> 1 - Добавить студента в конец списка.\n> 2 - Отсортировать студентов по возрасту.\n> 3 - Удалить студента из списка по ID.\n> 4 - Завершить программу.\nВвод >> "
+    print "\nВыбери необходимую функцию:\n".center(181, "=")
+    print"\n> 1 - Добавить студента в конец списка.\n> 2 - Отсортировать студентов по возрасту.\n> 3 - Удалить студента из списка по ID.\n> 4 - Завершить программу.\nВвод >> "
     function = gets.chomp.to_i
     if function == 1
       def add_list
@@ -40,15 +41,60 @@ def select_function
     elsif function == 2
       def picking_student
         loop do
-         print "Введи возраст для поиска всех студентов >> "
+         print "\nВведи возраст для поиска всех студентов >> ".rjust(120, "-")
            age = gets.chomp
            @student_id = (0 ... @arr.length).find_all { |i| @arr[i].include? age }
-           print "\nID студентов c возрастом #{age} в списке = #{@student_id}\n>1 - Переместить в отдельный список.\n>2 - Повторить поиск.\nВвод >> ".rjust(149, "-")
+           print "\nID студентов c возрастом #{age} в списке = #{@student_id}\n>1 - Переместить в отдельный список.\n>2 - Повторить поиск.\nВвод >> ".rjust(188, "-")
          move_method = gets.chomp.to_i
          break if move_method == 1
-        end  
-      end
+        end 
+        print "\nВведи ID студента для переноса в отдельный список >> ".rjust(130, "-")
+          move_student = gets.chomp.to_i
+          update_string = @arr [move_student]
+          @arr.slice!(move_student)
+          string = @arr.join("\n")
+          file = File.open(BUFFER, "w")
+          file.write ("#{string}\n")
+            file.close
+
+          File.write(STUDENT_LIST, File.read(BUFFER))
+          File.delete(BUFFER) if File.exist?(BUFFER) 
+          File.write(RESULTS, "#{update_string}\n", mode: "a")
+          puts "\nСписок обновлен:\n".center(170, "=")
+          File.foreach(STUDENT_LIST) { |student| puts student }
+          print "\n> 1 - Посмотреть отдельный список.\n> 2 - Выйти в главное меню.\nВвод >> ".rjust(148, "-")
+            show_results = gets.chomp.to_i
+          if show_results == 1
+            puts "\nОтдельный список:\n".center(170, "=")
+            File.foreach(RESULTS) { |student| puts student }
+          end
+        end
         picking_student
+
+    elsif function == 3
+      def delete_student
+        print "Введи фамилию студента которого необходимо удалить из списка >> "
+          delete_surname = gets.chomp
+        delete_id = (0 ... @arr.length).find_all {|i| @arr[i].include? delete_surname}
+        print "\nID студента с фамилией #{delete_surname} = #{delete_id}\n> 1 - Удалить.\n> 2 - Отменить и выйти в главное меню.\nВвод >> "
+          choise = gets.chomp.to_i
+
+        if choise == 1
+          print "Введи ID для удаления >> "
+            id_deleted = gets.chomp.to_i
+          @arr.slice!(id_deleted)
+            delete_string = @arr.join("\n")
+          file = File.open(BUFFER, "w")
+          file.write (delete_string)
+            file.close
+
+          File.write(STUDENT_LIST, File.read(BUFFER))
+          File.delete(BUFFER) if File.exist?(BUFFER)
+          File.foreach(STUDENT_LIST) { |student| puts student }
+        end
+      end
+      delete_student
+
     elsif function == 4
       abort "\nПрограмма завершена\n".center(171, "=")
     break if function == 2
@@ -56,4 +102,4 @@ def select_function
   end
 end
 
-puts select_function
+select_function
