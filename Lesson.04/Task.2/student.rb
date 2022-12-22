@@ -44,6 +44,9 @@ def select_function
          print "\nВведи возраст для поиска всех студентов >> ".rjust(120, "-")
            age = gets.chomp
            @student_id = (0 ... @arr.length).find_all { |i| @arr[i].include? age }
+            if @student_id == []
+              abort "\nСтуденты с таким возрастом отсутствуют. Программа завершена.\n".center(214, "=")
+            end
            print "\nID студентов c возрастом #{age} в списке = #{@student_id}\n>1 - Переместить в отдельный список.\n>2 - Повторить поиск.\nВвод >> ".rjust(188, "-")
          move_method = gets.chomp.to_i
          break if move_method == 1
