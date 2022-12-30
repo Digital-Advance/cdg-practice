@@ -20,7 +20,10 @@ loop do
     print">1 - Добавить автомобиль в конец списка.\n>2 - Заменить автомобиль в списке.\n>3 - Удалить автомобиль из списка по ID.\n>4 - Завершить программу.\nВвод >> "
     function = gets.chomp.to_i
 
-  if function == 1
+  if function == 4
+    abort "\nПрограмма завершена\n".center(171, "=")
+
+  elsif function == 1
     def add_list
       print "\nВведи модель автомобиля >> ".rjust(103, "-")
         add_car = gets.chomp
@@ -38,6 +41,7 @@ loop do
           print "\nID автомобиля в списке = #{@car_id}\n>1 - Удалить.\n>2 - Повторить поиск.\nВвод >> ".rjust(149, "-")
             delete_method = gets.chomp.to_i
       break if delete_method == 1
+    end
 
     print "\nВведи ID автомобиля для удаления >> ".rjust(112, "-")
       id_delete = gets.chomp.to_i
@@ -45,7 +49,7 @@ loop do
       string = @arr.join("\n")
       def delete(id_delete, string)
         file = File.open(BUFFER, "w")
-          file.write (string)
+          file.write ("#{string}\n")
             file.close
 
           File.write(CAR_LIST, File.read(BUFFER))
@@ -55,10 +59,6 @@ loop do
         end
       delete(id_delete, string)
     end
-
-  elsif function == 4
-    abort "\nПрограмма завершена\n".center(171, "=")
-  end
 
   break if function == 2
 end
