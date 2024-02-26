@@ -11,9 +11,9 @@ greeting = "Привет, #{name} #{surname}"
 def acces(name, surname, age, greeting)
   if age != 18
     puts "#{greeting}. Тебе меньше 18 лет, но начать учиться программировать 
-никогда не поздно"
+никогда не поздно. Доступ запрещен."
   else
-    puts "#{greeting}. Самое время заняться делом."
+    puts "#{greeting}. Самое время заняться делом. Доступ разрешен."
   end
 end
 
