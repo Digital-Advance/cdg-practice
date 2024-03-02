@@ -44,5 +44,16 @@ def added_in_hash_and_array(h, arr)
   arr.push(h)
 end
 
+def app(h, arr, s)
+  count_input
+    loop do
+      name_input
+      color_input
+      added_in_hash_and_array(h, arr)
+      s += 1
+    break if s == @count
+  end
+  puts "\nСписок добавленнх покемонов в виде массива: \n#{arr}"
+end
 
-
+app(h, arr, s)
