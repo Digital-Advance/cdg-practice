@@ -28,4 +28,25 @@ def name_input
   end
 end
 
+def color_input
+  print "\nВведи цвет покемона, которого ты добавил:>> "
+  loop do
+    @color = gets.chomp
+      if @color.size == 0
+        print "\nОшибка, строка цвета не может быть пустой. Повтори ввод:>>  "
+      end
+    break if @color.size > 0
+  end
+end
+
+def app(s)
+  loop do
+    name_input
+    color_input
+    s += 1
+  break if s == @count
+  end
+end
+
+
 
