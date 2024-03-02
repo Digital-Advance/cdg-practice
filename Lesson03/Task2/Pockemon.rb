@@ -39,13 +39,9 @@ def color_input
   end
 end
 
-def app(s)
-  loop do
-    name_input
-    color_input
-    s += 1
-  break if s == @count
-  end
+def added_in_hash_and_array(h, arr)
+  h = {name: @name, color: @color}
+  arr.push(h)
 end
 
 
