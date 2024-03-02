@@ -22,7 +22,7 @@ def name_input
   loop do
     @name = gets.chomp
       if @name.size == 0
-        print "\nОшибка, имя не может быть пустым. Повтори ввод:>>  "
+        print "\nОшибка, имя не может быть пустым. Повтори ввод:>> "
       end
     break if @name.size > 0
   end
@@ -33,7 +33,7 @@ def color_input
   loop do
     @color = gets.chomp
       if @color.size == 0
-        print "\nОшибка, строка цвета не может быть пустой. Повтори ввод:>>  "
+        print "\nОшибка, строка цвета не может быть пустой. Повтори ввод:>> "
       end
     break if @color.size > 0
   end
@@ -45,6 +45,7 @@ def added_in_hash_and_array(h, arr)
 end
 
 def app(h, arr, s)
+  greeting
   count_input
     loop do
       name_input
