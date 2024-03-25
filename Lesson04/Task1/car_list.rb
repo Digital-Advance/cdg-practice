@@ -34,7 +34,7 @@ def find
 end
 
 def update
-  print "\nВведите ID для перезаписи строки или 0 для возврата в меню: >> "
+  print "\nВведите ID для перезаписи строки: >> "
     id = gets.to_i
   print "\nВведите новую строку: >> "
     new_car = gets.chomp
@@ -49,8 +49,14 @@ def update
   File.delete(BUFFER) if File.exist?(BUFFER)
 end
 
+def add
+  print "Введите марку автомобиля для добавления в конец списка: >> "
+    car_add = gets.chomp
+  File.open(CAR_LIST, "a") { |new| new.write "#{car_add}\n" }
+end
+
 def delete
-  print "\nВведите ID для удаления строки или 0 для возврата в меню: >> "
+  print "\nВведите ID для удаления строки: >> "
     delete_id = gets.to_i
 
   list = File.open(CAR_LIST).readlines.map { |x| x.chomp }
@@ -78,6 +84,8 @@ def function
           find
         when 3
           update
+        when 4
+          add
         when 5
           delete
         when 6
