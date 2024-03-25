@@ -6,14 +6,13 @@ def exit_programm
 end
 
 def index_list
-  puts "Список базы данных:\n\n"
+  puts "\nСписок базы данных:\n\n"
     File.open(CAR_LIST).each_with_index do |value, index|
       puts "#{index} - #{value}"
   end
 end
 
 def find
-  #file = File.open(CAR_LIST).readlines.map(&:chomp)
     loop do
       file = File.open(CAR_LIST).readlines.map(&:chomp)
       puts "\nТип поиска:\n1. Строка.\n2. ID.\n3. Вернуться в меню."
@@ -23,8 +22,8 @@ def find
       when 1
         print "Введите искомую строку: >> "
           string = gets.chomp
-           id = (0...file.size).find_all { |i| file[i] == string }
-        puts "ID указанной строки = #{id}"
+           list_id = (0...file.size).find_all { |i| file[i] == string }
+        puts "ID указанной строки = #{list_id}"
       when 2
         print "Введите искомый ID: >> "
           id = gets.to_i
@@ -50,23 +49,42 @@ def update
   File.delete(BUFFER) if File.exist?(BUFFER)
 end
 
+def delete
+  print "\nВведите ID для удаления строки или 0 для возврата в меню: >> "
+    delete_id = gets.to_i
+
+  list = File.open(CAR_LIST).readlines.map { |x| x.chomp }
+    delete_car = list[delete_id]
+      list.slice!(delete_id)
+    
+  file = File.open(BUFFER, "w")
+    file.write("#{list.join("\n")}")
+  file.close
+
+    File.write(CAR_LIST, File.read(BUFFER))
+  File.delete(BUFFER) if File.exist?(BUFFER)
+  puts "Из списка удален автомобиль #{delete_car} под номером #{delete_id}."
+end
+
 def function
   loop do
-    puts "\nФункции работы со списком:\n\n1. Поиск.\n2. Перезаписать.\n3. Добавить\n4. Удалить.\n5. Завершить работу."
+    puts "\nФункции работы со списком:\n\n1. Показать список.\n2. Поиск.\n3. Перезаписать.\n4. Добавить\n5. Удалить.\n6. Завершить работу."
       print "\nВыберите нужную функцию: >> "
         function = gets.to_i
         case function
         when 1
-          find
+          index_list
         when 2
-          update 
+          find
+        when 3
+          update
         when 5
+          delete
+        when 6
       exit_programm
     end
   end
 end
-
-index_list
 
 function
 
