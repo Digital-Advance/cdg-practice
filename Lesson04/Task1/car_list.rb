@@ -13,8 +13,9 @@ def index_list
 end
 
 def find
-  file = File.open(CAR_LIST).readlines.map(&:chomp)
+  #file = File.open(CAR_LIST).readlines.map(&:chomp)
     loop do
+      file = File.open(CAR_LIST).readlines.map(&:chomp)
       puts "\nТип поиска:\n1. Строка.\n2. ID.\n3. Вернуться в меню."
         print "\nВыберите тип поиска >> "
          find_type = gets.to_i
@@ -22,7 +23,8 @@ def find
       when 1
         print "Введите искомую строку: >> "
           string = gets.chomp
-        puts "ID указанной строки = #{file.index(string)}"
+           id = (0...file.size).find_all { |i| file[i] == string }
+        puts "ID указанной строки = #{id}"
       when 2
         print "Введите искомый ID: >> "
           id = gets.to_i
