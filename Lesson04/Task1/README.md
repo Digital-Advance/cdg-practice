@@ -17,3 +17,7 @@ after starting the program, you need to select a function to work with. The
 program can show a list from a file, find a value in the list by ID or by name,
 overwrite the value by the specified ID, delete the value by the specified ID and
 add the value to the end of the list.
+
+# License
+
+MIT
