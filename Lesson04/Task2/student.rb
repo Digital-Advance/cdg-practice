@@ -14,8 +14,12 @@ def find
   print "Введите возраст для поиска студента: >> "
     age = gets.chomp
       find_age = read_file.select { |value| value.include? age }
-    puts "Студенты с возрастом #{age}:\n\nID     Студент     Возраст"
-  new_list = find_age.each_with_index { |value, index| puts "#{index}| #{value}" }
+    if find_age.size == 0
+      puts "\nСтудентов такого возраста нет в списке."
+    else
+      puts "\nСтуденты с возрастом #{age}:\n\nID     Студент     Возраст"
+    new_list = find_age.each_with_index { |value, index| puts "#{index}| #{value}" }
+  end
 end
 
 def move_student
@@ -36,4 +40,35 @@ def move_student
   File.delete(BUFFER) if File.exist?(BUFFER)
 end
 
-find
+def student_list
+  puts "\nСписок студентов:"
+    puts read_file
+end
+
+def result_list
+  list = File.open(RESULT).readlines.map(&:chomp)
+    puts "\nСписок студентов одного возраста:"
+  puts list
+end
+
+def menu
+  loop do
+    puts "\nВыберите действие:\n\n1. Показать список.\n2. Поиск по возрасту.\n3. Добавить в отдельный список.\n4. Показать отдельный список.\n5. Выход."
+      print "\nВвод: >> "
+    action = gets.to_i
+    case action
+    when 1
+      student_list
+    when 2
+      find
+    when 3
+      move_student
+    when 4
+      result_list
+    when 5
+      abort "Программа завершена"
+    end
+  end
+end
+
+menu
